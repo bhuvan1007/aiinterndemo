@@ -1,9 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
   --bg-primary: #0f172a;
   --bg-gradient: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
-  
+
   /* Glassmorphism */
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-bg-hover: rgba(255, 255, 255, 0.07);
@@ -12,14 +16,17 @@
   --backdrop-blur: 12px;
 
   /* Colors */
-  --primary: #6366f1; /* Indigo */
-  --secondary: #ec4899; /* Pink */
-  --accent: #8b5cf6; /* Violet */
-  
+  --primary: #6366f1;
+  /* Indigo */
+  --secondary: #ec4899;
+  /* Pink */
+  --accent: #8b5cf6;
+  /* Violet */
+
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
-  
+
   /* Text */
   --text-maim: #f8fafc;
   --text-muted: #94a3b8;
@@ -28,7 +35,7 @@
   font-family: 'Outfit', sans-serif;
   line-height: 1.5;
   color: var(--text-maim);
-  
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -77,13 +84,16 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0.1); 
+  background: rgba(0, 0, 0, 0.1);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.1); 
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.2); 
+  background: rgba(255, 255, 255, 0.2);
 }

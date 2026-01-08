@@ -15,7 +15,7 @@ const SidebarItem = ({ icon: Icon, label, active, onClick }) => (
     </button>
 );
 
-const Layout = ({ children }) => {
+const Layout = ({ children, currentView, onNavigate }) => {
     const { currentStudent } = useData();
 
     return (
@@ -30,9 +30,24 @@ const Layout = ({ children }) => {
                 </div>
 
                 <nav className="flex-1 px-4 space-y-2">
-                    <SidebarItem icon={LayoutDashboard} label="Overview" active={true} />
-                    <SidebarItem icon={BookOpen} label="Subjects" />
-                    <SidebarItem icon={Clock} label="Time Analysis" />
+                    <SidebarItem
+                        icon={LayoutDashboard}
+                        label="Overview"
+                        active={currentView === 'overview'}
+                        onClick={() => onNavigate('overview')}
+                    />
+                    <SidebarItem
+                        icon={BookOpen}
+                        label="Subjects"
+                        active={currentView === 'subjects'}
+                        onClick={() => onNavigate('subjects')}
+                    />
+                    <SidebarItem
+                        icon={Clock}
+                        label="Time Analysis"
+                        active={currentView === 'time'}
+                        onClick={() => onNavigate('time')}
+                    />
                 </nav>
 
                 <div className="p-4 border-t border-white/5">
