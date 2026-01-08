@@ -1,5 +1,4 @@
-import React from 'react';
-import { LayoutDashboard, BookOpen, Clock, User, LogOut } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Clock, User, LogOut, Layers, ChevronDown } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 
 const SidebarItem = ({ icon: Icon, label, active, onClick }) => (
@@ -16,7 +15,7 @@ const SidebarItem = ({ icon: Icon, label, active, onClick }) => (
 );
 
 const Layout = ({ children, currentView, onNavigate }) => {
-    const { currentStudent } = useData();
+    const { currentStudent, allData, setSelectedStudentId } = useData();
 
     return (
         <div className="flex h-screen overflow-hidden text-slate-200">
@@ -48,20 +47,49 @@ const Layout = ({ children, currentView, onNavigate }) => {
                         active={currentView === 'time'}
                         onClick={() => onNavigate('time')}
                     />
+                    <SidebarItem
+                        icon={Layers}
+                        label="Modules"
+                        active={currentView === 'modules'}
+                        onClick={() => onNavigate('modules')}
+                    />
                 </nav>
 
-                <div className="p-4 border-t border-white/5">
-                    <div className="flex items-center space-x-3 p-3 rounded-xl bg-white/5 border border-white/5">
-                        <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">
-                            <User size={20} />
-                        </div>
-                        <div className="overflow-hidden">
-                            <p className="text-sm font-medium truncate text-white">
-                                {currentStudent?.user?.name || "Loading..."}
-                            </p>
-                            <p className="text-xs text-slate-500 truncate">
-                                Grade {currentStudent?.overall?.stats?.grade}
-                            </p>
+                <div className="p-4 border-t border-white/5 relative">
+                    <div className="group relative">
+                        <button className="w-full flex items-center space-x-3 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-indigo-500/30 transition-all text-left">
+                            <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 flex-shrink-0">
+                                <User size={20} />
+                            </div>
+                            <div className="overflow-hidden flex-1">
+                                <p className="text-sm font-medium truncate text-white">
+                                    {currentStudent?.user?.name || "Select Student"}
+                                </p>
+                                <p className="text-xs text-slate-500 truncate">
+                                    ID: ...{currentStudent?.user?.googleId?.slice(-4)}
+                                </p>
+                            </div>
+                            <ChevronDown size={16} className="text-slate-500" />
+                        </button>
+
+                        <div className="absolute bottom-full left-0 w-full pb-2 hidden group-hover:block z-50">
+                            <div className="glass-card max-h-64 overflow-y-auto p-2 bg-[#0f172a] border border-slate-700 shadow-xl mx-4">
+                                {allData && Object.values(allData).map((student) => (
+                                    <button
+                                        key={student.user.googleId}
+                                        onClick={() => {
+                                            setSelectedStudentId(student.user.googleId);
+                                        }}
+                                        className={`w-full text-left px-3 py-2 rounded-lg text-sm mb-1 ${currentStudent?.user?.googleId === student.user.googleId
+                                            ? 'bg-indigo-500/20 text-indigo-300'
+                                            : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                                            }`}
+                                    >
+                                        <div className="font-medium truncate">{student.user.name}</div>
+                                        <div className="text-[10px] text-slate-500 truncate">{student.user.email}</div>
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

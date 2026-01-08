@@ -5,6 +5,8 @@ import Dashboard from './pages/Dashboard';
 import SubjectsView from './pages/SubjectsView';
 import TimeAnalysisView from './pages/TimeAnalysisView';
 
+import ModulesView from './pages/ModulesView';
+
 function App() {
   const [currentView, setCurrentView] = useState('overview');
 
@@ -14,6 +16,7 @@ function App() {
         {currentView === 'overview' && <Dashboard />}
         {currentView === 'subjects' && <SubjectsView />}
         {currentView === 'time' && <TimeAnalysisView />}
+        {currentView === 'modules' && <ModulesView />}
       </Layout>
     </DataProvider>
   );
